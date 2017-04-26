@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+version = '1.0.0'
+
+repositories {
+    jcenter()
+    maven {
+        url  'https://dl.bintray.com/android/android-tools'
+    }
+}
+
+dependencies {
+    compile 'com.android.tools.lint:lint-api:25.3.0'
+}
+
+jar {
+    archiveName 'lint.jar'
+    manifest {
+        attributes 'Lint-Registry': 'com.android.lints.MyIssueRegistry'
+    }
+}
