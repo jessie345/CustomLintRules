@@ -1,4 +1,4 @@
-package com.android.lints;
+package com.dedao.lints;
 
 import com.android.SdkConstants;
 import com.android.annotations.NonNull;
