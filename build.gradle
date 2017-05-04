@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     compile 'com.android.tools.lint:lint-api:25.3.0'
+    compile 'com.android.tools.lint:lint-checks:25.3.0'
 }
 
 jar {

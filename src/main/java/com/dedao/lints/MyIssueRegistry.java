@@ -12,10 +12,14 @@ public class MyIssueRegistry extends IssueRegistry {
 
     @Override
     public List<Issue> getIssues() {
-        return Arrays.asList(AutoPointerLayoutDetector.ISSUE_INCLUDE,
+        return Arrays.asList(
+                AutoPointerLayoutDetector.ISSUE_INCLUDE,
                 AutoPointerLayoutDetector.ISSUE_MERGE,
                 AutoPointerLayoutDetector.ISSUE_VIEWSTUB,
-                AutoPointerAdapterDetector.ISSUE_RECYCLER_ADAPTER
+                AutoPointerAdapterDetector.ISSUE_RECYCLER_ADAPTER,
+                AutoPointerFileDetector.ISSUE_NO_FILE,
+                AutoPointerFileDetector.ISSUE_UN_REGISTER_VIEW,
+                AutoPointerLayoutInflaterDetector.ISSUE_LAYOUTINFLATER
         );
     }
 
