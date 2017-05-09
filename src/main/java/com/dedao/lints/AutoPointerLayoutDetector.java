@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import java.util.Arrays;
 import java.util.Collection;
 
+@Deprecated
 public class AutoPointerLayoutDetector extends LayoutDetector {
 
     public static final Issue ISSUE_INCLUDE = Issue.create(
@@ -73,9 +74,9 @@ public class AutoPointerLayoutDetector extends LayoutDetector {
     public void visitElement(XmlContext context, Element element) {
         String tagName = element.getTagName();
         switch (tagName) {
-            case SdkConstants.VIEW_INCLUDE:
-                handleVisitIncludeTag(context, element);
-                break;
+//            case SdkConstants.VIEW_INCLUDE:
+//                handleVisitIncludeTag(context, element);
+//                break;
             case SdkConstants.VIEW_MERGE:
                 handleVisitMergeTag(context, element);
                 break;

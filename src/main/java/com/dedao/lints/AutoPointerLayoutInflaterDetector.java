@@ -47,8 +47,8 @@ public class AutoPointerLayoutInflaterDetector extends Detector implements Detec
 
     public static final Issue ISSUE_VIEW_INFLATE = Issue.create(
             "AutoPointerViewInflate",
-            "Using Wrong View.Inflate() Method",
-            "Using Wrong View.Inflate() Method,you should use LayoutInflaterWrapper",
+            "Using Wrong View.inflate() Method",
+            "Using Wrong View.inflate() Method,you should use LayoutInflaterWrapper.inflate()",
             Category.CORRECTNESS, 10, Severity.FATAL,
             new Implementation(
                     AutoPointerLayoutInflaterDetector.class,
@@ -74,16 +74,17 @@ public class AutoPointerLayoutInflaterDetector extends Detector implements Detec
 
         boolean isLayoutInflaterCall = isLayoutInflaterCall(context, node, method);
         boolean isViewInflateCall = isInViewCall(context, node, method);
+
         boolean inErrorState = isLayoutInflaterCall | isViewInflateCall;
         if (!inErrorState) return;
 
         String name = method.getName();
         if (LAYOUTINFLATER_FROM.equals(name)) {
             context.report(ISSUE_LAYOUTINFLATER, node, context.getLocation(node),
-                    "error use system LayoutInflater,should LayoutInflaterWrapper...");
+                    "error use system LayoutInflater,should use LayoutInflaterWrapper.");
         } else if (VIEW_INFLATE.equals(name)) {
             context.report(ISSUE_VIEW_INFLATE, node, context.getLocation(node),
-                    "error use View.Inflate(),should LayoutInflaterWrapper...");
+                    "error use View.inflate(),should use LayoutInflaterWrapper.inflate.");
         }
 
     }
