@@ -1,5 +1,6 @@
 package com.dedao.lints;
 
+import com.android.SdkConstants;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Context;
 import com.android.tools.lint.detector.api.Detector;
@@ -76,10 +77,16 @@ public class AutoPointerFileDetector extends Detector implements Detector.JavaPs
         super.afterCheckProject(context);
 
         File dir = context.getMainProject().getDir();
-        File file = new File(dir, "file.properties");
+        File parentDir = dir.getParentFile();
+        boolean gradleExists = new File(parentDir, SdkConstants.FN_BUILD_GRADLE).exists();
+        if (!gradleExists) {
+            return;
+        }
+
+        File file = new File(parentDir, "file.properties");
         if (!file.exists()) {
             context.report(ISSUE_NO_FILE, Location.create(context.file),
-                    "no file in project dir '" + dir.getAbsolutePath() + "'");
+                    "no file in project reference dir '" + parentDir.getAbsolutePath() + "'");
             return;
         }
 
@@ -95,7 +102,7 @@ public class AutoPointerFileDetector extends Detector implements Detector.JavaPs
                 String value = properties.getProperty(key);
                 if (value == null || value.isEmpty()) {
                     context.report(ISSUE_UN_REGISTER_VIEW, Location.create(context.file),
-                            "unregister view at project " + context.getProject().getName());
+                            "unregister view(" + key + ") at project " + context.getProject().getName());
                 }
 
             }
