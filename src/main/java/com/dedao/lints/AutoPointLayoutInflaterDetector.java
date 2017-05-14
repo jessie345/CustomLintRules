@@ -35,14 +35,14 @@ import java.util.List;
 import static com.android.SdkConstants.CLASS_LAYOUT_INFLATER;
 import static com.android.SdkConstants.CLASS_VIEW;
 
-public class AutoPointerLayoutInflaterDetector extends Detector implements Detector.JavaPsiScanner {
+public class AutoPointLayoutInflaterDetector extends Detector implements Detector.JavaPsiScanner {
     public static final Issue ISSUE_LAYOUTINFLATER = Issue.create(
             "AutoPointerLayoutInflater",
             "Using Wrong LayoutInflater Method",
             "Using Wrong LayoutInflater Method,you should use LayoutInflaterWrapper",
             Category.CORRECTNESS, 10, Severity.FATAL,
             new Implementation(
-                    AutoPointerLayoutInflaterDetector.class,
+                    AutoPointLayoutInflaterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     public static final Issue ISSUE_VIEW_INFLATE = Issue.create(
@@ -51,13 +51,13 @@ public class AutoPointerLayoutInflaterDetector extends Detector implements Detec
             "Using Wrong View.inflate() Method,you should use LayoutInflaterWrapper.inflate()",
             Category.CORRECTNESS, 10, Severity.FATAL,
             new Implementation(
-                    AutoPointerLayoutInflaterDetector.class,
+                    AutoPointLayoutInflaterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     private static final String LAYOUTINFLATER_FROM = "from";
-    private static final String VIEW_INFLATE = "inflate";
+    private static final String  VIEW_INFLATE = "inflate";
 
-    public AutoPointerLayoutInflaterDetector() {
+    public AutoPointLayoutInflaterDetector() {
     }
 
     @Nullable

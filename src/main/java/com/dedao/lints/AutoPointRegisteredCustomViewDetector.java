@@ -10,14 +10,11 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.android.tools.lint.detector.api.TextFormat;
 import com.intellij.psi.PsiClass;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +26,11 @@ import java.util.Set;
  * date 2017/4/27
  */
 
-public class AutoPointerFileDetector extends Detector implements Detector.JavaPsiScanner {
-    private static final String CLASS_RECYCLERVIEW = "android.support.v7.widget.RecyclerView";
+public class AutoPointRegisteredCustomViewDetector extends Detector implements Detector.JavaPsiScanner {
+    private static final String CLASS_RECYCLER_VIEW = "android.support.v7.widget.RecyclerView";
+    private static final String CLASS_GRID_VIEW = "android.widget.GridView";
+    private static final String CLASS_LIST_VIEW = "android.widget.ListView";
+    private static final String CLASS_EXPANDABLE_LIST_VIEW = "android.widget.ExpandableListView";
 
     public static final Issue ISSUE_NO_FILE = Issue.create(
             "NoFile",
@@ -41,7 +41,7 @@ public class AutoPointerFileDetector extends Detector implements Detector.JavaPs
             10,
             Severity.FATAL,
             new Implementation(
-                    AutoPointerFileDetector.class,
+                    AutoPointRegisteredCustomViewDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     public static final Issue ISSUE_UN_REGISTER_VIEW = Issue.create(
@@ -53,14 +53,17 @@ public class AutoPointerFileDetector extends Detector implements Detector.JavaPs
             10,
             Severity.FATAL,
             new Implementation(
-                    AutoPointerFileDetector.class,
+                    AutoPointRegisteredCustomViewDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     private Set<String> mSet = new HashSet<>();
 
     @Override
     public List<String> applicableSuperClasses() {
-        return Collections.singletonList(CLASS_RECYCLERVIEW);
+        return Arrays.asList(CLASS_RECYCLER_VIEW,
+                CLASS_EXPANDABLE_LIST_VIEW,
+                CLASS_GRID_VIEW,
+                CLASS_LIST_VIEW);
     }
 
     @Override

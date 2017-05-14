@@ -18,10 +18,10 @@ import java.util.List;
  * date 2017/4/24
  */
 
-public class AutoPointerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
+public class AutoPointRecyclerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_RECYCLERVIEW_ADAPTER = "android.support.v7.widget.RecyclerView.Adapter";
 
-    private static final String CLASS_AUTOPOINTER_RECYCLERVIEW_ADAPTER = "com.luojilab.autopoint.view.AutoPointRecyclerAdapter";
+    private static final String CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER = "fatty.library.widget.adapter.DDRecyclerAdapter";
 
     public static final Issue ISSUE_RECYCLER_ADAPTER = Issue.create(
             "RecyclerViewAutoPoint",
@@ -32,7 +32,7 @@ public class AutoPointerAdapterDetector extends Detector implements Detector.Jav
             10,
             Severity.FATAL,
             new Implementation(
-                    AutoPointerAdapterDetector.class,
+                    AutoPointRecyclerAdapterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     @Override
@@ -49,11 +49,11 @@ public class AutoPointerAdapterDetector extends Detector implements Detector.Jav
             return;
         }
 
-        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINTER_RECYCLERVIEW_ADAPTER, false);
+        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER, false);
 
         if (!supportAutoPoint) {
             context.report(ISSUE_RECYCLER_ADAPTER, node, context.getLocation(node),
-                    "unsupport auto point recyclerview,contact shuoliu");
+                    "Recycler Adapter 必须实现DDRecyclerAdapter,否则不支持自动打点 class:" + node.getName());
         }
     }
 
