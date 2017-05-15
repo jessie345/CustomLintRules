@@ -21,7 +21,7 @@ public class MyIssueRegistry extends IssueRegistry {
                 DuplicateIdInFileDetector.DEDAO_CROSS_LAYOUT,
 
                 /*检测那些没有继承AutoPointRecyclerAdapter的子类*/
-                AutoPointerAdapterDetector.ISSUE_RECYCLER_ADAPTER,
+                AutoPointerRecyclerAdapterDetector.ISSUE_RECYCLER_ADAPTER,
 
                 /*检测每个module下是否存在file.properties文件，并且
                 * 是否存在没有在文件中注册的自定义View*/
@@ -30,7 +30,13 @@ public class MyIssueRegistry extends IssueRegistry {
 
                 /*检测系统中对LayoutInflater.from 等相关方法的调用，
                 * 提示替换成LayoutInflaterWrapper对应的方法*/
-                AutoPointerLayoutInflaterDetector.ISSUE_LAYOUTINFLATER
+                AutoPointerLayoutInflaterDetector.ISSUE_LAYOUTINFLATER,
+
+                AutoPointerPagerAdapterDetector.ISSUE_PAGER_ADAPTER,
+
+                AutoPointerAbsListViewDetector.ISSUE_ABSLISTVIEW
+
+
         );
     }
 

@@ -10,13 +10,11 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.android.tools.lint.detector.api.TextFormat;
 import com.intellij.psi.PsiClass;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,6 +29,9 @@ import java.util.Set;
 
 public class AutoPointerFileDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_RECYCLERVIEW = "android.support.v7.widget.RecyclerView";
+    private static final String CLASS_LISTVIEW = "android.widget.ListView";
+    private static final String CLASS_GRIDVIEW = "android.widget.GridView";
+    private static final String CLASS_VIEWPAGER = "android.support.v4.view.ViewPager";
 
     public static final Issue ISSUE_NO_FILE = Issue.create(
             "NoFile",
@@ -60,7 +61,10 @@ public class AutoPointerFileDetector extends Detector implements Detector.JavaPs
 
     @Override
     public List<String> applicableSuperClasses() {
-        return Collections.singletonList(CLASS_RECYCLERVIEW);
+        return Arrays.asList(CLASS_RECYCLERVIEW
+                , CLASS_LISTVIEW
+                , CLASS_GRIDVIEW
+                , CLASS_VIEWPAGER);
     }
 
     @Override
