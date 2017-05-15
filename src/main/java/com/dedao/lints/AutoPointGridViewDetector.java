@@ -16,28 +16,29 @@ import java.util.List;
 /**
  * user liushuo
  * date 2017/4/24
+ * 检测所有ListView 子类，如果子类未继承DDListView,提示错误
  */
 
-public class AutoPointerRecyclerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
-    private static final String CLASS_RECYCLERVIEW_ADAPTER = "android.support.v7.widget.RecyclerView.Adapter";
+public class AutoPointGridViewDetector extends Detector implements Detector.JavaPsiScanner {
+    private static final String CLASS_GRID_VIEW = "android.widget.GridView";
 
-    private static final String CLASS_AUTOPOINTER_RECYCLERVIEW_ADAPTER = "com.luojilab.autopoint.view.AutoPointRecyclerAdapter";
+    private static final String CLASS_AUTO_POINT_GRID_VIEW = "fatty.library.widget.abslistview.DDGridView";
 
-    public static final Issue ISSUE_RECYCLER_ADAPTER = Issue.create(
-            "RecyclerViewAutoPoint",
-            "the RecyclerView.Adapter do not support auto point",
+    public static final Issue ISSUE_GRID_VIEW = Issue.create(
+            "GridViewAutoPoint",
+            "GridView subclass must extends DDGridView",
 
-            "the RecyclerView.Adapter do not support auto point",
+            "GridView subclass must extends DDGridView,so it can support auto point",
             Category.CORRECTNESS,
             10,
             Severity.FATAL,
             new Implementation(
-                    AutoPointerRecyclerAdapterDetector.class,
+                    AutoPointGridViewDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     @Override
     public List<String> applicableSuperClasses() {
-        return Collections.singletonList(CLASS_RECYCLERVIEW_ADAPTER);
+        return Collections.singletonList(CLASS_GRID_VIEW);
     }
 
     @Override
@@ -49,11 +50,11 @@ public class AutoPointerRecyclerAdapterDetector extends Detector implements Dete
             return;
         }
 
-        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINTER_RECYCLERVIEW_ADAPTER, false);
+        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTO_POINT_GRID_VIEW, false);
 
         if (!supportAutoPoint) {
-            context.report(ISSUE_RECYCLER_ADAPTER, node, context.getLocation(node),
-                    "unsupport auto point recyclerview,contact shuoliu");
+            context.report(ISSUE_GRID_VIEW, node, context.getLocation(node),
+                    String.format("%s do not support auto point,should extends DDGridView", node.toString()));
         }
     }
 

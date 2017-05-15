@@ -62,7 +62,7 @@ import static com.android.ide.common.resources.configuration.FolderConfiguration
 /**
  * Checks for duplicate ids within a layout and within an included layout
  */
-public class DuplicateIdInFileDetector extends LayoutDetector {
+public class AutoPointIdInFileDetector extends LayoutDetector {
     private Set<String> mIds;
     private Map<File, Set<String>> mFileToIds;
     private Map<File, List<String>> mIncludes;
@@ -75,7 +75,7 @@ public class DuplicateIdInFileDetector extends LayoutDetector {
     private List<Occurrence> mErrors;
 
     private static final Implementation IMPLEMENTATION = new Implementation(
-            DuplicateIdInFileDetector.class,
+            AutoPointIdInFileDetector.class,
             Scope.RESOURCE_FILE_SCOPE);
 
     /**
@@ -86,6 +86,15 @@ public class DuplicateIdInFileDetector extends LayoutDetector {
             "Duplicate ids within a single layout",
             "Within a layout, id's should be unique since otherwise `findViewById()` can " +
                     "return an unexpected view.",
+            Category.CORRECTNESS,
+            10,
+            Severity.FATAL,
+            IMPLEMENTATION);
+
+    public static final Issue DEDAO_INVALID_ID = Issue.create(
+            "InvalidID",
+            "Invalid id within a single layout",
+            "布局文件中，控件id不能和文件名相同,文件名会作为根View的唯一标识",
             Category.CORRECTNESS,
             10,
             Severity.FATAL,
@@ -109,7 +118,7 @@ public class DuplicateIdInFileDetector extends LayoutDetector {
     /**
      * Constructs a duplicate id check
      */
-    public DuplicateIdInFileDetector() {
+    public AutoPointIdInFileDetector() {
     }
 
 
@@ -255,6 +264,30 @@ public class DuplicateIdInFileDetector extends LayoutDetector {
     public void visitAttribute(@NonNull XmlContext context, @NonNull Attr attribute) {
         assert attribute.getName().equals(ATTR_ID) || ATTR_ID.equals(attribute.getLocalName());
         String id = attribute.getValue();
+        //首先判断 view的id不能和文件名重复，文件名会作为根view的
+        //唯一标识
+        String fileName = context.file.getName();
+
+        int index = NEW_ID_PREFIX.length() + id.indexOf(NEW_ID_PREFIX);
+        String simpleId = id.substring(index);
+
+        int dotIndex = fileName.indexOf(".");
+        String simpleFileName = fileName.substring(0, dotIndex);
+//        if (true) {
+//            Location location = context.getLocation(attribute);
+//            context.report(DEDAO_INVALID_ID, attribute, location,
+//                    String.format("file:%s,id:%s", simpleFileName,
+//                            simpleId));
+//        }
+
+        if (simpleFileName.equals(simpleId)) {
+            Location location = context.getLocation(attribute);
+            context.report(DEDAO_INVALID_ID, attribute, location,
+                    String.format("无效的 id `%1$s`,文件名已经默认作为根View的唯一性标识被占用(根View没有指定id的情况)",
+                            simpleId));
+            return;
+        }
+
         if (context.getPhase() == 1) {
             if (mIds.contains(id)) {
                 Location location = context.getLocation(attribute);
@@ -543,7 +576,7 @@ public class DuplicateIdInFileDetector extends LayoutDetector {
                                 if (mLocations == null) {
                                     mErrors = new ArrayList<>();
                                     mLocations = ArrayListMultimap.create();
-                                    mContext.getDriver().requestRepeat(DuplicateIdInFileDetector.this,
+                                    mContext.getDriver().requestRepeat(AutoPointIdInFileDetector.this,
                                             Scope.ALL_RESOURCES_SCOPE);
                                 }
 

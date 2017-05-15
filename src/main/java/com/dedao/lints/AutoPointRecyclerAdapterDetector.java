@@ -10,7 +10,6 @@ import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.intellij.psi.PsiClass;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,26 +18,26 @@ import java.util.List;
  * date 2017/4/24
  */
 
-public class AutoPointerPagerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
-    private static final String CLASS_PAGER_ADAPTER = "android.support.v4.view.PagerAdapter";
+public class AutoPointRecyclerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
+    private static final String CLASS_RECYCLERVIEW_ADAPTER = "android.support.v7.widget.RecyclerView.Adapter";
 
-    private static final String CLASS_AUTOPOINTER_PAGER_ADAPTER = "com.luojilab.autopoint.view.AutoPointPagerAdapter";
+    private static final String CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER = "fatty.library.widget.adapter.DDRecyclerAdapter";
 
-    public static final Issue ISSUE_PAGER_ADAPTER = Issue.create(
-            "ViewPagerAutoPoint",
-            "the PagerAdapter do not support auto point",
+    public static final Issue ISSUE_RECYCLER_ADAPTER = Issue.create(
+            "RecyclerViewAutoPoint",
+            "the RecyclerView.Adapter do not support auto point",
 
-            "the PagerAdapter do not support auto point",
+            "the RecyclerView.Adapter do not support auto point",
             Category.CORRECTNESS,
             10,
             Severity.FATAL,
             new Implementation(
-                    AutoPointerPagerAdapterDetector.class,
+                    AutoPointRecyclerAdapterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     @Override
     public List<String> applicableSuperClasses() {
-        return Collections.singletonList(CLASS_PAGER_ADAPTER);
+        return Collections.singletonList(CLASS_RECYCLERVIEW_ADAPTER);
     }
 
     @Override
@@ -50,11 +49,11 @@ public class AutoPointerPagerAdapterDetector extends Detector implements Detecto
             return;
         }
 
-        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINTER_PAGER_ADAPTER, false);
+        boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER, false);
 
         if (!supportAutoPoint) {
-            context.report(ISSUE_PAGER_ADAPTER, node, context.getLocation(node),
-                    String.format("unsupport auto point ViewPager,%s,contact shuoliu", node.toString()));
+            context.report(ISSUE_RECYCLER_ADAPTER, node, context.getLocation(node),
+                    "Recycler Adapter 必须实现DDRecyclerAdapter,否则不支持自动打点 class:" + node.getName());
         }
     }
 
