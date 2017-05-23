@@ -35,6 +35,7 @@ public class AutoPointRegisteredCustomViewDetector extends Detector implements D
     private static final String CLASS_GRID_VIEW = "android.widget.GridView";
     private static final String CLASS_LIST_VIEW = "android.widget.ListView";
     private static final String CLASS_EXPANDABLE_LIST_VIEW = "android.widget.ExpandableListView";
+    private static final String CLASS_VIEW_PAGER = "android.support.v4.view.ViewPager";
 
     public static final Issue ISSUE_NO_FILE = Issue.create(
             "NoFile",
@@ -67,6 +68,7 @@ public class AutoPointRegisteredCustomViewDetector extends Detector implements D
         return Arrays.asList(CLASS_RECYCLER_VIEW,
                 CLASS_EXPANDABLE_LIST_VIEW,
                 CLASS_GRID_VIEW,
+                CLASS_VIEW_PAGER,
                 CLASS_LIST_VIEW);
     }
 

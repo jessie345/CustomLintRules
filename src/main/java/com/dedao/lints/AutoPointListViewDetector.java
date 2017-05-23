@@ -22,6 +22,8 @@ import java.util.List;
 public class AutoPointListViewDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_LIST_VIEW = "android.widget.ListView";
 
+    private static final String CLASS_EXPANDABLE_LIST_VIEW = "android.widget.ExpandableListView";
+
     private static final String CLASS_AUTO_POINT_LIST_VIEW = "fatty.library.widget.abslistview.DDListView";
 
     public static final Issue ISSUE_LIST_VIEW = Issue.create(
@@ -49,6 +51,9 @@ public class AutoPointListViewDetector extends Detector implements Detector.Java
         if (evaluator.isAbstract(node)) {
             return;
         }
+
+        boolean shouldIgnore = evaluator.extendsClass(node, CLASS_EXPANDABLE_LIST_VIEW, false);
+        if (shouldIgnore) return;
 
         boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTO_POINT_LIST_VIEW, false);
 

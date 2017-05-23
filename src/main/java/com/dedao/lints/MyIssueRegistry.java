@@ -4,14 +4,19 @@ import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.Issue;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MyIssueRegistry extends IssueRegistry {
+    private static final boolean DISABLE_LINT = false;
+
     public MyIssueRegistry() {
     }
 
     @Override
     public List<Issue> getIssues() {
+        if (DISABLE_LINT) return Collections.emptyList();
+
         return Arrays.asList(
                 /*检测layout.xml中是否有id重复*/
                 AutoPointIdInFileDetector.DEDAO_WITHIN_LAYOUT,

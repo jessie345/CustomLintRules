@@ -55,7 +55,7 @@ public class AutoPointLayoutInflaterDetector extends Detector implements Detecto
                     Scope.JAVA_FILE_SCOPE));
 
     private static final String LAYOUTINFLATER_FROM = "from";
-    private static final String  VIEW_INFLATE = "inflate";
+    private static final String VIEW_INFLATE = "inflate";
 
     public AutoPointLayoutInflaterDetector() {
     }
@@ -75,16 +75,22 @@ public class AutoPointLayoutInflaterDetector extends Detector implements Detecto
         boolean isLayoutInflaterCall = isLayoutInflaterCall(context, node, method);
         boolean isViewInflateCall = isInViewCall(context, node, method);
 
-        boolean inErrorState = isLayoutInflaterCall | isViewInflateCall;
-        if (!inErrorState) return;
-
         String name = method.getName();
-        if (LAYOUTINFLATER_FROM.equals(name)) {
+        boolean fromMethod = LAYOUTINFLATER_FROM.equals(name);
+        boolean viewInflateMethod = VIEW_INFLATE.equals(name);
+
+        if (isLayoutInflaterCall && fromMethod) {
+
             context.report(ISSUE_LAYOUTINFLATER, node, context.getLocation(node),
                     "error use system LayoutInflater,should use LayoutInflaterWrapper.");
-        } else if (VIEW_INFLATE.equals(name)) {
+            return;
+        }
+
+        if (viewInflateMethod && isViewInflateCall) {
+
             context.report(ISSUE_VIEW_INFLATE, node, context.getLocation(node),
                     "error use View.inflate(),should use LayoutInflaterWrapper.inflate.");
+            return;
         }
 
     }

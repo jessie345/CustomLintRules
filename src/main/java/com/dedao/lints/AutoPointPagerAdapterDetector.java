@@ -20,6 +20,8 @@ import java.util.List;
 
 public class AutoPointPagerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_PAGER_ADAPTER = "android.support.v4.view.PagerAdapter";
+    private static final String CLASS_FRAGMENT_PAGER_ADAPTER = "android.support.v4.app.FragmentPagerAdapter";
+    private static final String CLASS_FRAGMENT_STATE_PAGER_ADAPTER = "android.support.v4.app.FragmentStatePagerAdapter";
 
     private static final String CLASS_AUTOPOINT_PAGER_ADAPTER = "fatty.library.widget.adapter.DDPagerAdapter";
 
@@ -48,6 +50,12 @@ public class AutoPointPagerAdapterDetector extends Detector implements Detector.
         if (evaluator.isAbstract(node)) {
             return;
         }
+
+        boolean isFragmentPagerAdapter = evaluator.extendsClass(node, CLASS_FRAGMENT_PAGER_ADAPTER, false);
+        if (isFragmentPagerAdapter) return;
+
+        boolean isFragmentStatePagerAdapter = evaluator.extendsClass(node, CLASS_FRAGMENT_STATE_PAGER_ADAPTER, false);
+        if (isFragmentStatePagerAdapter) return;
 
         boolean supportAutoPoint = evaluator.extendsClass(node, CLASS_AUTOPOINT_PAGER_ADAPTER, false);
 
