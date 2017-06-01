@@ -45,7 +45,10 @@ public class MyIssueRegistry extends IssueRegistry {
                 /*检测ListView/GridView/ExpandableListView子类是否继承DDListView(支持自动打点)*/
                 AutoPointListViewDetector.ISSUE_LIST_VIEW,
                 AutoPointGridViewDetector.ISSUE_GRID_VIEW,
-                AutoPointExpandableListViewDetector.ISSUE_EXPANDABLE_LIST_VIEW
+                AutoPointExpandableListViewDetector.ISSUE_EXPANDABLE_LIST_VIEW,
+
+                /*检测哪些设置了OnClick 属性，但是没有指定id的view*/
+                AutoPointLayoutOnclickDetector.ISSUE_MISSING_ID
         );
     }
 
