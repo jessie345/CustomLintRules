@@ -48,7 +48,14 @@ public class MyIssueRegistry extends IssueRegistry {
                 AutoPointExpandableListViewDetector.ISSUE_EXPANDABLE_LIST_VIEW,
 
                 /*检测哪些设置了OnClick 属性，但是没有指定id的view*/
-                AutoPointLayoutOnclickDetector.ISSUE_MISSING_ID
+                AutoPointLayoutOnclickDetector.ISSUE_MISSING_ID,
+
+                /*检测不支持自动打点的Dialog,PopUpWindow*/
+                AutoPointAlertDialogDetector.ISSUE_ALERT_DIALOG,
+                AutoPointV7AlertDialogDetector.ISSUE_ALERT_DIALOG,
+                AutoPointDialogDetector.ISSUE_DIALOG,
+                AutoPointPopWindowDetector.ISSUE_POP_WINDOW
+
         );
     }
 
