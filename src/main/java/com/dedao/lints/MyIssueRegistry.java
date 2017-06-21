@@ -54,7 +54,10 @@ public class MyIssueRegistry extends IssueRegistry {
                 AutoPointAlertDialogDetector.ISSUE_ALERT_DIALOG,
                 AutoPointV7AlertDialogDetector.ISSUE_ALERT_DIALOG,
                 AutoPointDialogDetector.ISSUE_DIALOG,
-                AutoPointPopWindowDetector.ISSUE_POP_WINDOW
+                AutoPointPopWindowDetector.ISSUE_POP_WINDOW,
+//
+//                /*检测自定义ViewGroup是否实现指定接口*/
+                AutoPointCustomViewGroupDetector.ISSUE_VIEW_GROUP
 
         );
     }
