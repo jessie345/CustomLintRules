@@ -111,7 +111,7 @@ public class AutoPointCustomViewGroupDetector extends Detector implements Detect
         boolean methodInDataAdapter = false;
         for (PsiMethod method : mMethods) {
             PsiClass pc = method.getContainingClass();
-            boolean isSubclass = evaluator.extendsClass(pc, CLASS_DATA_ADAPTER, false);
+            boolean isSubclass = evaluator.implementsInterface(pc, CLASS_DATA_ADAPTER, false);
 
             methodInDataAdapter = methodInDataAdapter || isSubclass;
 
