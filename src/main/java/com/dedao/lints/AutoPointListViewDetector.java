@@ -24,7 +24,7 @@ public class AutoPointListViewDetector extends Detector implements Detector.Java
 
     private static final String CLASS_EXPANDABLE_LIST_VIEW = "android.widget.ExpandableListView";
 
-    private static final String CLASS_AUTO_POINT_LIST_VIEW = "fatty.library.widget.abslistview.DDListView";
+    private static final String CLASS_AUTO_POINT_LIST_VIEW = "com.luojilab.ddlibrary.widget.abslistview";
 
     public static final Issue ISSUE_LIST_VIEW = Issue.create(
             "ListViewAutoPoint",

@@ -21,7 +21,7 @@ import java.util.List;
 public class AutoPointRecyclerAdapterDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_RECYCLERVIEW_ADAPTER = "android.support.v7.widget.RecyclerView.Adapter";
 
-    private static final String CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER = "fatty.library.widget.adapter.DDRecyclerAdapter";
+    private static final String CLASS_AUTOPOINT_RECYCLERVIEW_ADAPTER = "com.luojilab.ddlibrary.widget.adapter";
 
     public static final Issue ISSUE_RECYCLER_ADAPTER = Issue.create(
             "RecyclerViewAutoPoint",

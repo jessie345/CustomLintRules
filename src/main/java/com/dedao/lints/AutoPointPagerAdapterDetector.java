@@ -23,7 +23,7 @@ public class AutoPointPagerAdapterDetector extends Detector implements Detector.
     private static final String CLASS_FRAGMENT_PAGER_ADAPTER = "android.support.v4.app.FragmentPagerAdapter";
     private static final String CLASS_FRAGMENT_STATE_PAGER_ADAPTER = "android.support.v4.app.FragmentStatePagerAdapter";
 
-    private static final String CLASS_AUTOPOINT_PAGER_ADAPTER = "fatty.library.widget.adapter.DDPagerAdapter";
+    private static final String CLASS_AUTOPOINT_PAGER_ADAPTER = "com.luojilab.ddlibrary.widget.adapter.DDPagerAdapter";
 
     public static final Issue ISSUE_PAGER_ADAPTER = Issue.create(
             "ViewPagerAutoPoint",

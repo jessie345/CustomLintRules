@@ -22,7 +22,7 @@ import java.util.List;
 public class AutoPointExpandableListViewDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_EXPANDABLE_LIST_VIEW = "android.widget.ExpandableListView";
 
-    private static final String CLASS_AUTO_POINT_EXPANDABLE_LIST_VIEW = "fatty.library.widget.expandablelistview.DDExpandableListView";
+    private static final String CLASS_AUTO_POINT_EXPANDABLE_LIST_VIEW = "com.luojilab.ddlibrary.widget.expandablelistview.DDExpandableListView";
 
     public static final Issue ISSUE_EXPANDABLE_LIST_VIEW = Issue.create(
             "ExpandableListViewAutoPoint",

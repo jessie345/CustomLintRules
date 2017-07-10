@@ -22,7 +22,7 @@ import java.util.List;
 public class AutoPointGridViewDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_GRID_VIEW = "android.widget.GridView";
 
-    private static final String CLASS_AUTO_POINT_GRID_VIEW = "fatty.library.widget.abslistview.DDGridView";
+    private static final String CLASS_AUTO_POINT_GRID_VIEW = "com.luojilab.ddlibrary.widget.abslistview.DDGridView";
 
     public static final Issue ISSUE_GRID_VIEW = Issue.create(
             "GridViewAutoPoint",
