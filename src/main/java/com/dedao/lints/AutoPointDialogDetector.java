@@ -24,7 +24,7 @@ public class AutoPointDialogDetector extends Detector implements Detector.JavaPs
     private static final String CLASS_ALERT_V7_DIALOG = "android.support.v7.app.AlertDialog";
     private static final String CLASS_DIALOG = "android.app.Dialog";
 
-    private static final String CLASS_AUTO_POINT_DIALOG = "com.luojilab.autopoint.widget.dialog.DDDialog";
+    private static final String CLASS_AUTO_POINT_DIALOG = "com.luojilab.netsupport.autopoint.widget.dialog.DDDialog";
 
     public static final Issue ISSUE_DIALOG = Issue.create(
             "DialogAutoPoint",

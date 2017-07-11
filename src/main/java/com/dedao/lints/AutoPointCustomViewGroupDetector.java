@@ -31,7 +31,7 @@ public class AutoPointCustomViewGroupDetector extends Detector implements Detect
 
     private static final String CLASS_VIEW_GROUP = "android.view.ViewGroup";
 
-    private static final String CLASS_DATA_ADAPTER = "com.luojilab.autopoint.view.DataAdapter";
+    private static final String CLASS_DATA_ADAPTER = "com.luojilab.netsupport.autopoint.view.DataAdapter";
 
     public static final Issue ISSUE_VIEW_GROUP = Issue.create(
             "ViewGroupAutoPoint",

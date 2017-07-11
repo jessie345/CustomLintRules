@@ -22,7 +22,7 @@ import java.util.List;
 public class AutoPointAlertDialogDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_ALERT_DIALOG = "android.app.AlertDialog";
 
-    private static final String CLASS_AUTO_POINT_ALERT_DIALOG = "com.luojilab.autopoint.widget.dialog.DDAlertDialog";
+    private static final String CLASS_AUTO_POINT_ALERT_DIALOG = "com.luojilab.netsupport.autopoint.widget.dialog.DDAlertDialog";
 
     public static final Issue ISSUE_ALERT_DIALOG = Issue.create(
             "AlertDialogAutoPoint",

@@ -22,7 +22,7 @@ import java.util.List;
 public class AutoPointPopWindowDetector extends Detector implements Detector.JavaPsiScanner {
     private static final String CLASS_POP_WINDOW = "android.widget.PopupWindow";
 
-    private static final String CLASS_AUTO_POINT_POP_WINDOW = "com.luojilab.autopoint.widget.popup.DDPopupWindow";
+    private static final String CLASS_AUTO_POINT_POP_WINDOW = "com.luojilab.netsupport.autopoint.widget.popup.DDPopupWindow";
 
     public static final Issue ISSUE_POP_WINDOW = Issue.create(
             "AlertDialogAutoPoint",
