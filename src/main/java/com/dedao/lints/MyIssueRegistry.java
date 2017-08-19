@@ -57,7 +57,10 @@ public class MyIssueRegistry extends IssueRegistry {
                 AutoPointPopWindowDetector.ISSUE_POP_WINDOW,
 //
 //                /*检测自定义ViewGroup是否实现指定接口*/
-                AutoPointCustomViewGroupDetector.ISSUE_VIEW_GROUP
+                AutoPointCustomViewGroupDetector.ISSUE_VIEW_GROUP,
+
+                /*检测动态创建的view*/
+                DynamicNewViewDetector.ISSUE
 
         );
     }
